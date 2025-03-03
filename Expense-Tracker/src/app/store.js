@@ -3,7 +3,8 @@ import reducer from './expnseSlice'
 
 const store = configureStore({
     reducer : {
-        reducer
+        reducer,
+        devTools : false
     }
 })
 
