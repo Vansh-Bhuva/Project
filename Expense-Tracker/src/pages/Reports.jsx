@@ -60,7 +60,7 @@ const Reports = () => {
   }, []);
 
   return (
-    <div className="p-6 dark:text-amber-300">
+    <div className=" dark:text-amber-300">
       <h1 className="text-2xl font-bold mb-4">Reports & Analytics</h1>
       <div className="flex justify-center">
         <PieChart width={400} height={400}>

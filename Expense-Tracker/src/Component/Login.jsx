@@ -1,5 +1,5 @@
 import { Input, Button } from "./index";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import authService from "../firebase/Auth";
 import { useNavigate, Link } from "react-router";
 import { useDispatch } from "react-redux";
@@ -19,9 +19,9 @@ const Login = () => {
       if (user) {
         authService.getCurrentUser().then((userData) => {
           if (userData) {
-            dispatch(login(user));
+            dispatch(login({ id: user.uid, email: user.email }));
+            navigate("/");
           }
-          navigate("/");
         });
       } else {
         setError(() => "Invalid Credentials");
@@ -34,8 +34,8 @@ const Login = () => {
   return (
     <>
       <div className="flex min-h-screen items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md bg-gray-800 text-white shadow-lg rounded-lg p-8">
-          <h2 className="text-center text-3xl font-extrabold text-white">
+        <div className="w-full max-w-md bg-white  shadow-lg rounded-lg p-8">
+          <h2 className="text-center text-3xl font-extrabold text-black">
             Login
           </h2>
 
@@ -44,7 +44,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-white"
+                className="block text-sm font-medium text-black"
               >
                 Email
               </label>
@@ -71,7 +71,7 @@ const Login = () => {
               <div className="flex justify-between items-center">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-white"
+                  className="block text-sm font-medium text-black"
                 >
                   Password
                 </label>
@@ -84,7 +84,7 @@ const Login = () => {
                 <Input
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full p-3 border rounded-lg  focus:ring-white "
+                  className="w-full p-3 border rounded-lg  focus:ring-black "
                   {...register("password", { required: true })}
                 />
               </div>
@@ -94,7 +94,7 @@ const Login = () => {
             <div>
               <Button
                 type="submit"
-                className="flex w-full justify-center rounded-lg bg-emerald-400 px-5 py-3 text-base font-semibold text-black shadow-md hover:bg-emerald-500 transition duration-300"
+                className="flex w-full justify-center rounded-lg bg-indigo-600 px-5 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-500 transition duration-300"
               >
                 Sign in
               </Button>
@@ -109,7 +109,7 @@ const Login = () => {
           </form>
 
           {/* Signup Link */}
-          <p className="mt-6 text-center text-sm text-white">
+          <p className="mt-6 text-center text-sm text-black">
             Don't have an account?{"  "}
             <Link to="/Signup" className="text-blue-500">
               Sign up

@@ -32,7 +32,7 @@ export class AuthService {
         Amount: Amount, // don't write like this amount:{amount}
         Date: Date,
         type: type,
-        user_id : user_id
+        user_id: user_id,
       });
     } catch (error) {
       console.log("Firebase service :: createPost :: error", error);
@@ -67,9 +67,7 @@ export class AuthService {
         collection(this.databases, "expense-data"),
         where("user_id", "==", id)
       );
-
       const querySnapshot = await getDocs(q);
-      
       return querySnapshot.docs;
     } catch (error) {
       console.log("Firebase service :: getPosts :: error", error);

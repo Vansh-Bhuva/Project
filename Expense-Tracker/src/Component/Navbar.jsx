@@ -104,10 +104,10 @@ const Navbar = () => {
               Reports
             </Link>
           </li>
-          <li>
+          <li className="mt-2 mb-4">
             <Logout />
           </li>
-          <li className="mt-2">
+          <li className="mt-4 mb-2">
             <Dark />
           </li>
           <li>

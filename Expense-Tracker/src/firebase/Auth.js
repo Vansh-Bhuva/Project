@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 
+
 export class AuthService {
   app;
   databases;
@@ -44,8 +45,9 @@ export class AuthService {
         email,
         password
       );
-      
+
       return userCredential.user;
+
     } catch (error) {
       console.log("Firebase service :: Login :: error", error);
     }
