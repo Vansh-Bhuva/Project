@@ -56,15 +56,16 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Logout />
-          </li>
-          <li className="mt-1.5">
-            <Dark />
-          </li>
-          <li>
             <Avtar
             />
           </li>
+          <li>
+            <Logout />
+          </li>
+          <li className="mt-2">
+            <Dark />
+          </li>
+          
         </ul>
 
         {/* Mobile Menu Button */}
@@ -106,8 +107,12 @@ const Navbar = () => {
           <li>
             <Logout />
           </li>
-          <li>
+          <li className="mt-2">
             <Dark />
+          </li>
+          <li>
+            <Avtar
+            />
           </li>
         </ul>
       )}

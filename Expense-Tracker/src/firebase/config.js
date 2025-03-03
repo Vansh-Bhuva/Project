@@ -27,10 +27,6 @@ export class AuthService {
 
   async createPost(Category, Amount, Date, type, user_id) {
     try {
-      console.log(
-        `Category : ${Category} Amount : ${Amount} and Date is : ${Date} type is ${type}`
-      );
-
       return await addDoc(collection(this.databases, "expense-data"), {
         Category: Category, // don't write like this Category:{Category}
         Amount: Amount, // don't write like this amount:{amount}
@@ -80,8 +76,6 @@ export class AuthService {
       return false;
     }
   }
-
-  //file Upload Services
 }
 
 const service = new AuthService();

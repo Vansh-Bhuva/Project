@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const Avtar = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const email = useSelector((state) => state.reducer.useremail);
+
+  const email = useSelector((state)=>state.reducer.useremail)  
 
   // Toggle dropdown visibility on click
   const toggleDropdown = () => {
@@ -26,11 +27,11 @@ const Avtar = () => {
 
       {/* Dropdown (Email) */}
       {isDropdownVisible && (
-        <div className="absolute right-0 bg-white shadow-md rounded-lg py-2 px-4 w-48 border border-gray-300">
+        <div className="absolute bg-white shadow-md rounded-lg py-2 px-4 w-48 border border-gray-300">
           <p className="text-sm text-gray-700">{email}</p>
         </div>
       )}
-
+      
       {/* Hover functionality */}
       <div
         className="absolute top-0 left-0 w-full h-full z-10 m-auto"

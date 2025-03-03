@@ -12,7 +12,6 @@ const AddExpense = () => {
   const Insert = async (data) => {
     const datestring = data.Date;
     const timestamp = Timestamp.fromDate(new Date(datestring));
-    console.log("Submitted Data:", data);
     service.createPost(data.Category, parseInt(data.Amount), timestamp, data.type, auth_id);
     reset(); // Clears the form after submission
   };

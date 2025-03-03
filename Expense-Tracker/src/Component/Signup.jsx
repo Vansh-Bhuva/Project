@@ -1,22 +1,30 @@
-import authService from "../firebase/Auth"
+import { useDispatch } from "react-redux";
+import authService from "../firebase/Auth";
 import { Input, Button } from "./index";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../app/expnseSlice";
+import { useState } from "react";
 
 const Signup = () => {
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const {register,handleSubmit} = useForm()
-
-  const singup = async(data) => {
-    if(data.password === data.confirmpwd)
-    {
-      const account = await authService.createAccount(data.email,data.password)
-      console.log("account create successfully",  account);
+  const singup = async (data) => {
+    if (data.password === data.confirmpwd) {
+      if (data.password >= 6) {
+        await authService.createAccount(data.email, data.password);
+        dispatch(login());
+        navigate("/");
+      } else {
+        setError(() => "Password must be at least 6 characters");
+      }
+    } else {
+      setError(() => "Password doesn't match");
     }
-    else{
-      console.log("error in signup");
-    }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-6 py-12">
@@ -28,7 +36,10 @@ const Signup = () => {
         <form onSubmit={handleSubmit(singup)} className="mt-6 space-y-6">
           {/* Email Address */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email Address
             </label>
             <div className="mt-2">
@@ -36,14 +47,17 @@ const Signup = () => {
                 type="email"
                 placeholder="Enter your email"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                {...register("email",{required:true})}
+                {...register("email", { required: true })}
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <div className="mt-2">
@@ -51,14 +65,17 @@ const Signup = () => {
                 type="password"
                 placeholder="Enter a strong password"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                {...register("password",{required:true})}
+                {...register("password", { required: true })}
               />
             </div>
           </div>
 
           {/* Confirm Password */}
           <div>
-            <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="confirm-password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Confirm Password
             </label>
             <div className="mt-2">
@@ -66,7 +83,7 @@ const Signup = () => {
                 type="password"
                 placeholder="Re-enter your password"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                {...register("confirmpwd",{required:true})}
+                {...register("confirmpwd", { required: true })}
               />
             </div>
           </div>
@@ -79,6 +96,7 @@ const Signup = () => {
             >
               Sign Up
             </Button>
+            <div className="text-red-600 m-2">{error !== "" && error}</div>
           </div>
 
           {/* Divider */}
@@ -90,8 +108,7 @@ const Signup = () => {
 
         {/* Already have an account? */}
         <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link to="/Login">Sign in</Link>
+          Already have an account? <Link to="/Login">Sign in</Link>
         </p>
       </div>
     </div>

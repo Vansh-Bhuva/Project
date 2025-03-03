@@ -1,15 +1,17 @@
-import { Input, Button} from "./index";
-import { useForm } from "react-hook-form";
+import { Input, Button } from "./index";
+import { set, useForm } from "react-hook-form";
 import authService from "../firebase/Auth";
 import { useNavigate, Link } from "react-router";
 import { useDispatch } from "react-redux";
 import { login } from "../app/expnseSlice";
+import { useState } from "react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
 
   const signin = async (data) => {
     try {
@@ -17,13 +19,12 @@ const Login = () => {
       if (user) {
         authService.getCurrentUser().then((userData) => {
           if (userData) {
-            console.log(userData.id);
-            console.log(userData.email);
-            
             dispatch(login(user));
           }
           navigate("/");
         });
+      } else {
+        setError(() => "Invalid Credentials");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -97,6 +98,7 @@ const Login = () => {
               >
                 Sign in
               </Button>
+              <div className="text-red-600 m-2">{error !== "" && error}</div>
             </div>
 
             {/* Divider */}
