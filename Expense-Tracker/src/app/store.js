@@ -4,8 +4,8 @@ import reducer from './expnseSlice'
 const store = configureStore({
     reducer : {
         reducer,
-        devTools : false
-    }
+    },
+    devTools : false
 })
 
 export default store
