@@ -4,6 +4,7 @@ import authService from "./firebase/Auth";
 import { login as loginStore, logout } from "./app/expnseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar, Footer, Spinner } from "./Component";
+import { Analytics } from "@vercel/analytics/react";
 function App() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.reducer.isLoggedIn);
@@ -40,6 +41,8 @@ function App() {
       ) : (
         <Spinner />
       )}
+
+      <Analytics />
     </>
   );
 }
