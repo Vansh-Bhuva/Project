@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav className="bg-white dark:bg-gray-700 dark:text-yellow-300 dark:shadow-2xl  p-4 border-gray shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold">
+        <Link to="/" className="text-2xl font-bold mb-2">
           ExpenseTracker
         </Link>
 
