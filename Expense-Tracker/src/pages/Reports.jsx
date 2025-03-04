@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import service from "../firebase/config";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -60,10 +60,11 @@ const Reports = () => {
   }, []);
 
   return (
-    <div className=" dark:text-amber-300">
+    <div className=" dark:text-amber-300 min-w-full min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Reports & Analytics</h1>
       <div className="flex justify-center">
-        <PieChart width={400} height={400}>
+        <ResponsiveContainer width="100%" height={300}>
+        <PieChart>
           <Pie
             data={data}
             cx="50%"
@@ -82,6 +83,7 @@ const Reports = () => {
           <Tooltip />
           <Legend />
         </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
