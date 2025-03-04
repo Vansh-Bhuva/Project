@@ -108,7 +108,7 @@ const Signup = () => {
 
         {/* Already have an account? */}
         <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account? <Link to="/Login">Sign in</Link>
+          Already have an account? <Link to="/Login" className="text-indigo-600">Sign in</Link>
         </p>
       </div>
     </div>
