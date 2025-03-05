@@ -15,9 +15,16 @@ const Signup = () => {
   const singup = async (data) => {
     if (data.password === data.confirmpwd) {
       if (data.password >= 6) {
-        await authService.createAccount(data.email, data.password);
-        dispatch(login());
-        navigate("/");
+        const user = await authService.createAccount(data.email, data.password);
+
+        if (user) {
+          const auth = authService.Login(data.email, data.password);
+          if (auth) {
+            dispatch(login({ id: user.uid, email: user.email }));
+            console.log("Dispatc");
+            navigate("/");
+          }
+        }
       } else {
         setError(() => "Password must be at least 6 characters");
       }
@@ -108,7 +115,10 @@ const Signup = () => {
 
         {/* Already have an account? */}
         <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account? <Link to="/Login" className="text-indigo-600">Sign in</Link>
+          Already have an account?{" "}
+          <Link to="/Login" className="text-indigo-600">
+            Sign in
+          </Link>
         </p>
       </div>
     </div>
