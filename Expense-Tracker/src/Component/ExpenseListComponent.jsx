@@ -12,13 +12,13 @@ const ExpenseListComponent = () => {
   const auth = useSelector((state) => state.reducer.isLoggedIn);
   const auth_id = useSelector((state) => state.reducer.userid);
 
-  const fetchData =  useCallback(async() => {
+  const fetchData = useCallback(async () => {
     try {
       setLoader(true);
-      
+
       const info = await service.getPosts(auth_id);
 
-      const dataArray = []; 
+      const dataArray = [];
 
       info.forEach((doc) => {
         const docData = doc.data();
@@ -38,7 +38,7 @@ const ExpenseListComponent = () => {
     } finally {
       setLoader(false);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     if (auth && auth_id) {
@@ -52,14 +52,18 @@ const ExpenseListComponent = () => {
   //   }
   // }, [auth_id]);
 
-  let data = useSelector((state) => state.reducer.data) || [];
-
+  let data = useSelector((state) => state.reducer.data);
+  data = Array.isArray(data) ? data : [] 
+  
   return (
     <div className="p-4">
       {!loader ? (
-        data.map((expense, index) => (
-          <ExpenseCard key={index} expense={expense} />
-        ))
+         data.length > 0 ?
+          data.map((expense, index) => (
+            <ExpenseCard key={index} expense={expense} />
+          ))
+         : "No Transactions Found"
+          
       ) : (
         <Spinner />
       )}

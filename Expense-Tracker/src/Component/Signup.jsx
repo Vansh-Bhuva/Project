@@ -21,7 +21,6 @@ const Signup = () => {
           const auth = authService.Login(data.email, data.password);
           if (auth) {
             dispatch(login({ id: user.uid, email: user.email }));
-            console.log("Dispatc");
             navigate("/");
           }
         }
