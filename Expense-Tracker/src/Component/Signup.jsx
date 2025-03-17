@@ -14,11 +14,11 @@ const Signup = () => {
 
   const singup = async (data) => {
     if (data.password === data.confirmpwd) {
-      if (data.password >= 6) {
+      if (data.password.length >= 6) {
         const user = await authService.createAccount(data.email, data.password);
 
         if (user) {
-          const auth = authService.Login(data.email, data.password);
+          const auth = await authService.Login(data.email, data.password);
           if (auth) {
             dispatch(login({ id: user.uid, email: user.email }));
             navigate("/");
